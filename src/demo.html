@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CommentMarkdown Demo</title>
+
+    <!-- 
+    # HTML 注释示例
+    
+    这个文件演示了 **HTML 注释**的 Markdown 渲染。
+    
+    ## 特性
+    
+    - 自动识别 HTML 注释
+    - 支持完整的 Markdown 语法
+    - 鼠标悬停即可查看
+    
+    > 将鼠标悬停在这个注释上试试！
+    -->
+
+    <style>
+      /* 
+         * # CSS 样式注释
+         * 
+         * 这是 CSS 样式表中的注释，也支持 Markdown 渲染。
+         * 
+         * ## 样式规则
+         * 
+         * - body: 设置背景和字体
+         * - .container: 容器样式
+         * - .highlight: 高亮文本
+         */
+
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f0;
+        padding: 20px;
+      }
+
+      /*
+         * ## 容器样式
+         * 
+         * 最大宽度 **800px**，居中显示
+         */
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      /* 高亮样式 */
+      .highlight {
+        background-color: yellow;
+        padding: 2px 4px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 
+    # 页面主体
+    
+    以下是页面的主要内容结构
+    -->
+
+    <div class="container">
+      <!--
+        ## 标题区域
+        
+        包含：
+        - 主标题
+        - 副标题
+        - 说明文字
+        -->
+      <h1>CommentMarkdown Render</h1>
+      <p>鼠标悬停在注释上查看 <span class="highlight">Markdown 渲染</span></p>
+
+      <!--
+        ## 功能列表
+        
+        ### 支持的格式
+        
+        1. **多行注释** (`/* */`, `<!-- -->`, `"""`) 2. **Markdown 语法**
+      (标题、列表、粗体等) 3. **多种语言** (TypeScript, Python, HTML, CSS 等)
+      ### 不支持 - 单行注释 (`//`, `#`) - 多行单行注释 -->
+      <ul>
+        <li>TypeScript/JavaScript</li>
+        <li>Python</li>
+        <li>HTML/CSS</li>
+        <li>Java, C/C++</li>
+      </ul>
+    </div>
+
+    <!-- 简单的单行注释 -->
+
+    <script>
+      /*
+       * # JavaScript 脚本注释
+       *
+       * 这是 JavaScript 代码中的注释。
+       *
+       * ## 功能说明
+       *
+       * 这个脚本会在页面加载后：
+       *
+       * 1. 显示欢迎消息
+       * 2. 记录日志
+       *
+       * **注意**: 这只是演示代码
+       */
+
+      console.log("CommentMarkdown Render - Demo Page");
+
+      /*
+       * ### 初始化函数
+       *
+       * 在 DOM 加载完成后执行初始化
+       */
+      document.addEventListener("DOMContentLoaded", function () {
+        console.log("Page loaded!");
+      });
+    </script>
+  </body>
+</html>
