@@ -3,13 +3,28 @@
   "displayName": "CommentMarkdownRender",
   "description": "A extension render markdown format view pane for every programming language comments",
   "version": "0.0.1",
+  "icon": "icon.png",
   "engines": {
     "vscode": "^1.105.0"
   },
   "categories": [
     "Other"
   ],
-  "activationEvents": [],
+  "publisher": "CommentMarkdownRender",
+  "activationEvents": [
+    "onLanguage:typescript",
+    "onLanguage:javascript",
+    "onLanguage:python",
+    "onLanguage:java",
+    "onLanguage:c",
+    "onLanguage:cpp",
+    "onLanguage:csharp",
+    "onLanguage:go",
+    "onLanguage:rust",
+    "onLanguage:php",
+    "onLanguage:html",
+    "onLanguage:css"
+  ],
   "main": "./dist/extension.js",
   "contributes": {},
   "scripts": {

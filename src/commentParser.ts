@@ -78,7 +78,7 @@ export class CommentParser {
 
       // 移除行尾空白
       line = line.trimEnd();
-      
+
       processedLines.push(line);
     }
 

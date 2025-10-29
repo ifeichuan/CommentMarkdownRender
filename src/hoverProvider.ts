@@ -3,7 +3,11 @@
  */
 
 import * as vscode from "vscode";
-import { CommentParser, CommentPattern, LANGUAGE_COMMENT_PATTERNS } from "./commentParser";
+import {
+  CommentParser,
+  CommentPattern,
+  LANGUAGE_COMMENT_PATTERNS,
+} from "./commentParser";
 
 export class CommentMarkdownHoverProvider implements vscode.HoverProvider {
   private parser: CommentParser;
@@ -106,7 +110,8 @@ export class CommentMarkdownHoverProvider implements vscode.HoverProvider {
     let foundEnd = false;
 
     // 对于相同的开始和结束标记（如 Python 的 """），需要从下一行开始查找
-    const searchStartLine = matchedPattern.start === matchedPattern.end ? startLine + 1 : startLine;
+    const searchStartLine =
+      matchedPattern.start === matchedPattern.end ? startLine + 1 : startLine;
 
     for (let i = searchStartLine; i < document.lineCount; i++) {
       const lineText = document.lineAt(i).text;

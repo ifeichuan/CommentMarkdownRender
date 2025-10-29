@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <!-- Background -->
+  <rect width="128" height="128" rx="16" fill="#4A90E2"/>
+  
+  <!-- Comment symbol /* */ -->
+  <text x="20" y="55" font-family="monospace" font-size="48" font-weight="bold" fill="white">/*</text>
+  <text x="60" y="105" font-family="monospace" font-size="48" font-weight="bold" fill="white">*/</text>
+  
+  <!-- Markdown M symbol -->
+  <text x="50" y="85" font-family="sans-serif" font-size="36" font-weight="bold" fill="#FFD700">M↓</text>
+</svg>
