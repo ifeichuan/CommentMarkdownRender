@@ -2,7 +2,7 @@
   "name": "commentmarkdownrender",
   "displayName": "CommentMarkdownRender",
   "description": "A extension render markdown format view pane for every programming language comments",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "icon": "icon.png",
   "engines": {
     "vscode": "^1.105.0"
