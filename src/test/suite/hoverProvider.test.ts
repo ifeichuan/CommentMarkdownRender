@@ -193,4 +193,127 @@ def test():
       assert.fail("Content should be MarkdownString");
     }
   });
+
+  test("应该忽略字符串中的注释符号", async () => {
+    const content = `
+const text = "This is not a comment /* inside string";
+const another = "Also not */ inside string";
+function test() {}
+`;
+    const doc = await vscode.workspace.openTextDocument({
+      content,
+      language: "typescript",
+    });
+
+    await vscode.window.showTextDocument(doc);
+
+    // 测试在字符串内容上 hover，不应该显示 hover
+    const position = new vscode.Position(1, 20);
+    const hovers = await vscode.commands.executeCommand<vscode.Hover[]>(
+      "vscode.executeHoverProvider",
+      doc.uri,
+      position
+    );
+
+    // 不应该为字符串内容提供我们的 hover
+    // 过滤出可能包含我们扩展的 hover（markdown 内容）
+    const ourHovers = hovers?.filter((h) => {
+      const content = h.contents[0];
+      if (content instanceof vscode.MarkdownString) {
+        // 如果包含注释符号，可能是我们扩展的
+        return content.value.includes("/*") || content.value.includes("*/");
+      }
+      return false;
+    });
+
+    assert.strictEqual(
+      ourHovers?.length || 0,
+      0,
+      "Should not provide hover for string content with comment symbols"
+    );
+  });
+
+  test("应该处理带有特殊字符的注释", async () => {
+    const content = `
+/*
+ * @param {string} name - User name
+ * @returns {number} The result
+ * @example
+ * const result = calculate("test");
+ */
+function calculate(name: string): number {
+    return 0;
+}
+`;
+    const doc = await vscode.workspace.openTextDocument({
+      content,
+      language: "typescript",
+    });
+
+    await vscode.window.showTextDocument(doc);
+
+    const position = new vscode.Position(2, 5);
+    const hovers = await vscode.commands.executeCommand<vscode.Hover[]>(
+      "vscode.executeHoverProvider",
+      doc.uri,
+      position
+    );
+
+    assert.ok(hovers?.length > 0, "Should have hovers");
+
+    const hover = hovers[0];
+    const content0 = hover.contents[0];
+
+    if (content0 instanceof vscode.MarkdownString) {
+      const markdownContent = content0.value;
+      assert.ok(
+        markdownContent.includes("@param"),
+        "Should contain @param tag"
+      );
+      assert.ok(
+        markdownContent.includes("@returns"),
+        "Should contain @returns tag"
+      );
+    }
+  });
+
+  test("应该支持 HTML 注释", async () => {
+    const content = `
+<!--
+This is an HTML comment
+With **markdown** support
+-->
+<div></div>
+`;
+    const doc = await vscode.workspace.openTextDocument({
+      content,
+      language: "html",
+    });
+
+    await vscode.window.showTextDocument(doc);
+
+    const position = new vscode.Position(2, 5);
+    const hovers = await vscode.commands.executeCommand<vscode.Hover[]>(
+      "vscode.executeHoverProvider",
+      doc.uri,
+      position
+    );
+
+    assert.ok(hovers?.length > 0, "Should have hovers");
+
+    const hover = hovers[0];
+    const content0 = hover.contents[0];
+
+    if (content0 instanceof vscode.MarkdownString) {
+      const markdownContent = content0.value;
+      assert.ok(
+        markdownContent.includes("HTML comment"),
+        "Should contain comment text"
+      );
+      assert.ok(
+        markdownContent.includes("**markdown**"),
+        "Should contain bold text"
+      );
+    }
+  });
 });

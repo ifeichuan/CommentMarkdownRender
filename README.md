@@ -1,71 +1,134 @@
-# commentmarkdownrender README
+# CommentMarkdown Render
 
-This is the README for your extension "commentmarkdownrender". After writing up a brief description, we recommend including the following sections.
+A VS Code extension that automatically filters out comment symbols when the mouse hovers over comments and renders plain text in Markdown format in a floating window.
 
-## Features
+## Functional Features
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+1. ✅ ** only compatible with multi-line comments ** (excluding multi-line '//')
 
-For example if there is an image subfolder under your extension project workspace:
+2. ✅ ** multilingual support ** : automatically match comment formats based on different programming languages
 
-\!\[feature X\]\(images/feature-x.png\)
+3. ✅ **Markdown rendering ** : supports full Markdown syntax
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+4. ✅ ** comprehensive testing ** : Each function has corresponding test cases
 
-## Requirements
+Supported languages
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+- TypeScript/JavaScript (JSX/TSX)
 
-## Extension Settings
+- Java
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
+- C/C++/C#
 
-For example:
+- Go, Rust, PHP, Swift, Kotlin, Scala
 
-This extension contributes the following settings:
+- Python
 
-* `myExtension.enable`: Enable/disable this extension.
-* `myExtension.thing`: Set to `blah` to do something.
+- HTML/XML
 
-## Known Issues
+- CSS/SCSS/Less
 
-Calling out known issues can help limit users opening duplicate issues against your extension.
+- SQL
 
-## Release Notes
+## Usage Method
 
-Users appreciate release notes as you update your extension.
+Install the extension
 
-### 1.0.0
+2. In supported language files, hover the mouse over multi-line comments
 
-Initial release of ...
+3. View the content rendered in Markdown
 
-### 1.0.1
+## Example
 
-Fixed issue #.
+Input (Annotation)
 
-### 1.1.0
+````typescript
 
-Added features X, Y, and Z.
+/ *
 
----
+* # Function Description
 
-## Following extension guidelines
+*
 
-Ensure that you've read through the extensions guidelines and follow the best practices for creating your extension.
+This function is used for:
 
-* [Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines)
+*
 
-## Working with Markdown
+* - Process user input
 
-You can author your README using Visual Studio Code. Here are some useful editor keyboard shortcuts:
+Verify the data
 
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux).
-* Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux).
-* Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets.
+* - Return the result
 
-## For more information
+*
 
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
+** * Note **: Parameters cannot be empty
 
-**Enjoy!**
+* /
+
+function processData(input: string) {
+
+//...
+
+}
+
+` ` `
+
+
+
+Output (Hover display)
+
+
+
+Rendered Markdown with:
+
+
+
+- Formatted title
+
+A clear list
+
+- ** Bold ** emphasis
+
+
+
+"Development"
+
+
+
+For more details, please refer to [DEVELOPMENT.md](./DEVELOPMENT.md)
+
+
+
+"Test"
+
+
+
+```bash
+
+pnpm test
+
+` ` `
+
+
+
+Fulfilled requirements
+
+
+
+- [x] Only compatible with multi-line comments (excluding multi-line //)
+
+- [x] Match different formats according to different programming languages
+
+- [x] Implements the basic rendering of Markdown
+
+- [x] Write tests for each step
+
+
+
+"Permission"
+
+
+
+MIT
+````

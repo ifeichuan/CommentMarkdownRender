@@ -2,10 +2,27 @@
  * 注释解析器 - 负责从不同语言的注释中提取纯文本内容
  */
 
+/**
+ * 注释模式接口
+ */
 export interface CommentPattern {
   start: string;
   end: string;
   linePrefix?: string; // 可选的行前缀，如 *
+}
+
+/**
+ * 支持的语言 ID 类型
+ */
+export type SupportedLanguageId = keyof typeof LANGUAGE_COMMENT_PATTERNS;
+
+/**
+ * 解析结果接口
+ */
+export interface ParseResult {
+  content: string;
+  lineCount: number;
+  isEmpty: boolean;
 }
 
 /**
@@ -39,14 +56,14 @@ export const LANGUAGE_COMMENT_PATTERNS: Record<string, CommentPattern[]> = {
 };
 
 /**
- * 解析注释文本，提取纯文本内容
+ * 注释解析器类
  */
 export class CommentParser {
   /**
    * 从注释块中提取纯文本
    * @param text 完整的注释文本
    * @param pattern 注释模式
-   * @returns 提取的纯文本
+   * @returns 提取的纯文本，如果解析失败则返回 null
    */
   public parseComment(text: string, pattern: CommentPattern): string | null {
     // 移除前后空白
@@ -69,11 +86,9 @@ export class CommentParser {
       line = line.trimStart();
 
       // 移除常见的装饰符（如 * ）
+      // 只移除单独的 *，不破坏 markdown 粗体标记 **text**
       if (line.startsWith("*") && !line.startsWith("**")) {
         line = line.slice(1).trimStart();
-      } else if (line.startsWith("**/")) {
-        // 处理结束标记
-        continue;
       }
 
       // 移除行尾空白

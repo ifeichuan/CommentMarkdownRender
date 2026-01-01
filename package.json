@@ -10,6 +10,10 @@
   "categories": [
     "Other"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ifeichuan/CommentMarkdownRender.git"
+  },
   "publisher": "CommentMarkdownRender",
   "activationEvents": [
     "onLanguage:typescript",
