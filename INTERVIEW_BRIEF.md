@@ -11,7 +11,7 @@
 
 - **语言与工具**：TypeScript、VS Code Extension API（`HoverProvider`、`MarkdownString`）、esbuild 打包、ESLint、TypeScript 严格模式。
 - **依赖管理与构建**：pnpm、`esbuild.js` 生产/开发双模式、`tsc --noEmit` 类型校验。
-- **测试**：`@vscode/test-electron` 端到端运行、`commentParser`/`hoverProvider` 单测与集成测。
+- **测试**：`@vscode/test-electron` 端到端运行、`commentParser`/`hoverProvider` 单测与集成测试。
 
 ## 核心原理（按模块）
 
@@ -23,7 +23,7 @@
 ## 解析流程（时序）
 
 1. 扩展激活时注册支持的语言列表并绑定 `CommentMarkdownHoverProvider`。
-2. 用户 Hover → Provider 获取光标所在注释范围（向上找开始，向下找结束，处理对称标记如 `"""`）。
+2. 用户 Hover → Provider 获取光标所在注释范围（向上找开始，向下找结束，处理对称标记，如 Python 的 `"""` 或 HTML 的 `<!-- -->`）。
 3. 若范围合法且非多行 `//`，调用 `CommentParser` 提取纯文本 Markdown。
 4. 返回 `Hover(MarkdownString)`，VS Code 完成渲染。
 
@@ -38,7 +38,9 @@
 
 可直接使用的简历表述（示例）：
 
-> 基于 VS Code `HoverProvider` 开发跨 15+ 语言的注释 Markdown 渲染插件。通过“语言→注释模式”映射与上下文扫描精确锁定注释块，过滤多行 `//`，逐行剥离装饰符并保持 Markdown 语义，最终用 `MarkdownString` 原生渲染。全程无状态、依赖常数级字符串操作，在大文件 Hover 下亦无明显延迟，并配套 TypeScript 严格模式与端到端测试保障。
+> 基于 VS Code `HoverProvider` 开发跨 15+ 语言的注释 Markdown 渲染插件，在 Hover 时用 `MarkdownString` 原生渲染，无需 Webview。  
+> 通过 `语言→注释模式` 映射与上下文扫描精确锁定注释块，过滤多行 `//`，逐行剥离装饰符保持 Markdown 语义。  
+> 全程无状态、依赖常数级字符串操作，配合 TypeScript 严格模式与端到端测试，在大文件 Hover 下亦无明显延迟。
 
 ## 可能的面试题
 
