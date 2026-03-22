@@ -1,63 +1,80 @@
-# CommentMarkdown Render
+# Comment Markdown Render
 
-一个 VS Code 扩展，当鼠标悬停在注释上时，自动过滤注释符号，将纯文本以 Markdown 格式渲染在悬浮窗口中。
+一个 Visual Studio Code 扩展，可以直接在代码注释中渲染 Markdown 内容，包括对 LaTeX 数学表达式的支持。它处理各种编程语言中最常见的注释风格，包括多行块注释和堆叠的单行注释。
 
-## 功能特性
-
-1. ✅ **只适配多行注释**（不包括多行 `//`）
-2. ✅ **多语言支持**：根据不同的编程语言自动匹配注释格式
-3. ✅ **Markdown 渲染**：支持完整的 Markdown 语法
-4. ✅ **全面测试**：每个功能都有对应的测试用例
-
-## 支持的语言
-
-- TypeScript/JavaScript (JSX/TSX)
-- Java
-- C/C++/C#
-- Go, Rust, PHP, Swift, Kotlin, Scala
-- Python
-- HTML/XML
-- CSS/SCSS/Less
-- SQL
-
-## 使用方法
-
-1. 安装扩展
-2. 在支持的语言文件中，将鼠标悬停在多行注释上
-3. 查看 Markdown 渲染的内容
+最初的动机是能够像 Jupyter 笔记本一样在大多数语言中编码，特别是在形式化语言（例如 Lean4）中，渲染数学公式特别有用。
 
 ## 示例
 
-### 输入（注释）
+如下所示，当悬停在以 `md` 前缀开头的注释块上时，扩展会渲染 Markdown 内容。
 
-```typescript
-/*
- * # 功能说明
- *
- * 这个函数用于：
- *
- * - 处理用户输入
- * - 验证数据
- * - 返回结果
- *
- * **注意**: 参数不能为空
+![扩展功能演示](image.png)
+
+## 如何使用
+
+要触发 Markdown 渲染，只需在你的注释中以 `md` 前缀开头。
+
+### 多行块注释
+
+该扩展支持大多数语言中的标准块注释：
+
+```javascript
+/** md
+ * # 文档说明
+ * 这是一个带有数学公式的 **JSDoc** 注释：
+ * $$ \frac{-b \pm \sqrt{b^2-4ac}}{2a} $$
  */
-function processData(input: string) {
-  // ...
-}
 ```
 
-### 输出（悬停显示）
+```python
+""" md
+# Python 文档字符串
+你也可以在这里使用 *Markdown*！
+- 项目 1
+- 项目 2
+"""
+```
 
-渲染后的 Markdown，带有：
+### 单行注释
 
-- 格式化的标题
-- 清晰的列表
-- **粗体**强调
+你也可以堆叠单行注释：
+
+```javascript
+// md # 标题
+// md 这是一个列表：
+// md 1. 第一点
+// md 2. 第二点，包含 $\alpha$
+```
+
+## 支持的注释风格
+
+| 语法 | 编程语言 |
+|------|---------|
+| `/* md ... */` 或 `/** md ... */` | JS、TS、C++、Java、CSS 等 |
+| `""" md ... """` | Python、Julia |
+| `''' md ... '''` | Python |
+| `/* md ... */` | Go、Rust、PHP、Swift、Kotlin、Scala |
+| `// md` | C 风格语言 |
+| `# md` | Python、Ruby、YAML、Bash |
+| `-- md` | Lua、Haskell、SQL |
+| `/- md ... -/` | Lean4 |
+| `<!-- md ... -->` | HTML/XML |
+
+## 功能特性
+
+✅ **多行和单行注释支持** - 支持块注释和堆叠的单行注释
+
+✅ **多语言支持** - 自动检测并处理不同编程语言的注释格式
+
+✅ **完整的 Markdown 渲染** - 支持完整的 Markdown 语法，包括列表、表格、代码块等
+
+✅ **LaTeX 数学表达式** - 使用内联 ($...$) 和显示 ($$...$$) 符号渲染数学公式
+
+✅ **全面的测试覆盖** - 在所有支持的语言和注释风格中进行了全面测试
 
 ## 开发
 
-详见 [DEVELOPMENT.md](./DEVELOPMENT.md)
+详见 [DEVELOPMENT.md](./DEVELOPMENT.md)。
 
 ## 测试
 
@@ -65,13 +82,6 @@ function processData(input: string) {
 pnpm test
 ```
 
-## 已实现的需求
-
-- [x] 只适配多行注释(不包括多行 //)
-- [x] 根据不同的编程语言匹配不同的格式
-- [x] 实现 Markdown 的基本渲染
-- [x] 每一步都写好测试
-
-## 许可
+## 许可证
 
 MIT
